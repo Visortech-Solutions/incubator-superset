@@ -124,4 +124,7 @@ RUN cd /app \
     && pip install --ignore-installed -r requirements-dev.txt \
     && pip install --ignore-installed -r requirements-extra.txt \
     && pip install --ignore-installed -r requirements-local.txt || true
+
+RUN flask fab babel-compile --target superset/translations
+
 USER superset
