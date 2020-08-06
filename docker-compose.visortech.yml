@@ -47,6 +47,12 @@ services:
       - redis
     networks:
       - visortech_network
+    volumes:
+      - ./docker/docker-init.sh:/app/docker-init.sh
+      - ./docker/pythonpath_dev:/app/pythonpath
+      - ./superset:/app/superset
+      - ./superset-frontend:/app/superset-frontend
+      - superset_home:/app/superset_home
     environment:
       - COMPOSE_PROJECT_NAME=superset
 
