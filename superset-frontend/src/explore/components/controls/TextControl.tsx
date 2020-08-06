@@ -43,7 +43,7 @@ export default class TextControl extends React.Component<TextControlProps> {
     let value = event.target.value;
 
     // Validation & casting
-    const errors = [];
+    const errors: any = [];
     if (value !== '' && this.props.isFloat) {
       const error = legacyValidateNumber(value);
       if (error) {
