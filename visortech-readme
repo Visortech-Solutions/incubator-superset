@@ -1,0 +1,53 @@
+# Visortech Superset Changelog
+
+- Created a new superset docker-compose 
+
+The section below is a new superset docker-compose configuration which is supposed to work with visortech resources. 
+
+```yaml
+superset:
+    environment:
+        - COMPOSE_PROJECT_NAME=superset
+        
+        # database configurations (do not modify)
+        - DATABASE_DB=superset
+        - DATABASE_HOST=db
+        - DATABASE_PASSWORD=superset
+        - DATABASE_USER=superset
+        
+        # database engine specific environment variables
+        # change the below if you prefers another database engine
+        - DATABASE_PORT=${POSTGRES_PORT}
+        - DATABASE_DIALECT=postgresql
+        - POSTGRES_DB=${POSTGRES_DB}
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+        
+        #MYSQL_DATABASE=superset
+        #MYSQL_USER=superset
+        #MYSQL_PASSWORD=superset
+        #MYSQL_RANDOM_ROOT_PASSWORD=yes
+        
+        # Add the mapped in /app/pythonpath_docker which allows devs to override stuff
+        - PYTHONPATH=/app/pythonpath:/app/pythonpath_docker
+        
+        - REDIS_HOST=${REDIS_HOST}
+        - REDIS_PORT=${REDIS_PORT}
+        
+        - FLASK_ENV=production
+        - SUPERSET_ENV=production
+        - SUPERSET_LOAD_EXAMPLES=no
+```
+
+In order to make it work the following environment variables must be exported
+
+```
+POSTGRES_PORT=
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+REDIS_HOST=
+REDIS_PORT=
+```
+
+Other resources required in order for the docker setup to work is `postgres` and `redis`
